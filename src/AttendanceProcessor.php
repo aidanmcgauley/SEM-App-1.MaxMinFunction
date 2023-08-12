@@ -41,14 +41,6 @@ class AttendanceProcessor
                 return json_encode($output);
                 exit();
             }
-        
-            // Check if attendance is within acceptable range
-            if($attendance > $total_assigned_hours) {
-            $output['error'] = true;
-            $output['message'] = "Attendance hours cannot exceed total assigned hours.";
-            return json_encode($output);
-            exit();
-            }
 
             // Check if attendance is non-negative
             if ($attendance < 0) {
@@ -62,6 +54,14 @@ class AttendanceProcessor
             if ($total_assigned_hours < 0) {
                 $output['error'] = true;
                 $output['message'] = "Total hours cannot be negative.";
+                return json_encode($output);
+                exit();
+            }
+
+            // Check if attendance is within acceptable range
+            if($attendance > $total_assigned_hours) {
+                $output['error'] = true;
+                $output['message'] = "Attendance hours cannot exceed total assigned hours.";
                 return json_encode($output);
                 exit();
             }
