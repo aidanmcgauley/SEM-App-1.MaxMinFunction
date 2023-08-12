@@ -23,16 +23,18 @@ final class AttendanceProcessorTest extends TestCase{
 
     public function testEmptyItemName(): void
     {
-        $items = ['Lecture', '', 'Support', 'Canvas']; // One item is empty
+        $items = ['Lecture', '', 'Support', 'Canvas'];
         $attendances = [2, 1, 2, 2];
         $total_hours = [33, 22, 44, 55];
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertTrue($output['error']);
         $this->assertEquals("Item names cannot be empty.", $output['message']);
     }
+
 
     public function testAttendanceNotAnInteger(): void
     {
