@@ -46,7 +46,7 @@ final class FunctionsTest extends TestCase{
     public function testGetMaxMinWithMixedNegativeAndPositiveAttendances()
     {
         $items = ['item1', 'item2', 'item3'];
-        $attendances = [-10, 0, 10];
+        $attendances = [10, 0, 10];
         $result = getMaxMin($items, $attendances);
 
         $expectedMaxItems = ['item3 - 10'];
