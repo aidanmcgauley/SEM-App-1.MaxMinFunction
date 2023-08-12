@@ -1,4 +1,5 @@
 <?php
+require('functions.inc.php');
 class AttendanceProcessor
 {
     public function process($items, $attendances, $total_hours)
