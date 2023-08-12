@@ -1,0 +1,25 @@
+stages:
+  - test
+
+variables:
+  # Define your PHP version
+  PHP_VERSION: "7.4"
+
+# Cache vendor/ directory to speed up builds
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  # Install dependencies
+  - apt-get update -yqq
+  - apt-get install -yqq zip unzip
+  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  - composer install
+
+test:
+  stage: test
+  image: php:${PHP_VERSION}-cli
+  script:
+    # Run PHPUnit tests
+    - vendor/bin/phpunit --bootstrap vendor/autoload.php tests/
