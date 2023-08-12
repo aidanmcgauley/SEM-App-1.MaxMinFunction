@@ -75,7 +75,8 @@ class AttendanceProcessor
         $output['max_items']=$max_min_items[0];
         $output['min_items']=$max_min_items[1];
 
-        return $output;
+        #return $output;
+        return json_encode($output);
 
     }
 }

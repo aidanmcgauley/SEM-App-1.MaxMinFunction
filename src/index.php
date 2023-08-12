@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-type: application/json");
-require('functions.inc.php');
+#require('functions.inc.php');
 require('AttendanceProcessor.php');
 
 $item_1 = $_REQUEST['item_1'];
@@ -24,5 +24,6 @@ $total_hours = array($total_hours_1, $total_hours_2, $total_hours_3, $total_hour
 $processor = new AttendanceProcessor();
 $output = $processor->process($items, $attendances, $total_hours);
 
-echo json_encode($output);
+#echo json_encode($output);
+echo $output;
 exit();
