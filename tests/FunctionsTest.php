@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require('functions.inc.php');
+require('../src/functions.inc.php');
 use PHPUnit\Framework\TestCase;
 
 final class FunctionsTest extends TestCase{

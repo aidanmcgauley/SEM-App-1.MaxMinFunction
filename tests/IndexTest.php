@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require('index.php');
+require('../src/index.php');
 use PHPUnit\Framework\TestCase;
 
 final class IndexTest extends TestCase{
