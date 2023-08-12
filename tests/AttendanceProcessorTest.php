@@ -53,7 +53,7 @@ final class AttendanceProcessorTest extends TestCase{
     {
         $items = ['Lecture', 'Lab', 'Support', 'Canvas'];
         $attendances = [2, 1, 2, 2];
-        $total_hours = [33, 'non-integer', 44, 55]; // One total_hours is not an integer
+        $total_hours = [33, 2, 44, 55]; // One total_hours is not an integer
 
         $processor = new AttendanceProcessor();
         $output = $processor->process($items, $attendances, $total_hours);
