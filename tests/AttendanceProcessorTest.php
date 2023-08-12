@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
-define('PROJECT_ROOT', '/home/aidan/SEM-App/sem-maxmin-40058902');
-require(PROJECT_ROOT . '/src/index.php');
+#define('PROJECT_ROOT', '/home/aidan/SEM-App/sem-maxmin-40058902');
+#require(PROJECT_ROOT . '/src/index.php');
+require(__DIR__ . '/../src/AttendanceProcessor .php');
+
 use PHPUnit\Framework\TestCase;
 
 final class IndexTest extends TestCase{
