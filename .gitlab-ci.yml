@@ -21,5 +21,7 @@ test:
   stage: test
   image: php:${PHP_VERSION}-cli
   script:
-    # Run PHPUnit tests
-    - vendor/bin/phpunit --bootstrap vendor/autoload.php tests/
+    # Run PHPUnit tests for AttendanceProcessorTest
+    - vendor/bin/phpunit --bootstrap vendor/autoload.php src/AttendanceProcessorTest.php
+    # Run PHPUnit tests for FunctionsTest
+    - vendor/bin/phpunit --bootstrap vendor/autoload.php src/FunctionsTest.php
