@@ -13,7 +13,8 @@ final class AttendanceProcessorTest extends TestCase{
         $total_hours = [33, 22, 44, 55];
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertFalse($output['error']);
         $this->assertEquals($items, $output['items']);
@@ -43,7 +44,8 @@ final class AttendanceProcessorTest extends TestCase{
         $total_hours = [33, 22, 44, 55];
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertTrue($output['error']);
         $this->assertEquals("Attendance hours must be integers.", $output['message']);
@@ -56,7 +58,8 @@ final class AttendanceProcessorTest extends TestCase{
         $total_hours = [33, 'non-integer', 44, 55]; // One total_hours is not an integer
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertTrue($output['error']);
         $this->assertEquals("Total hours must be integers.", $output['message']);
@@ -69,7 +72,8 @@ final class AttendanceProcessorTest extends TestCase{
         $total_hours = [33, 22, 44, 55];
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertTrue($output['error']);
         $this->assertEquals("Attendance hours cannot exceed total assigned hours.", $output['message']);
@@ -82,7 +86,8 @@ final class AttendanceProcessorTest extends TestCase{
         $total_hours = [33, 22, 44, 55];
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertTrue($output['error']);
         $this->assertEquals("Attendance hours cannot be negative.", $output['message']);
@@ -95,7 +100,8 @@ final class AttendanceProcessorTest extends TestCase{
         $total_hours = [33, -22, 44, 55]; // One total_hours is negative
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertTrue($output['error']);
         $this->assertEquals("Total hours cannot be negative.", $output['message']);
