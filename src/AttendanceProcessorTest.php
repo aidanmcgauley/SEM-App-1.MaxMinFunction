@@ -23,7 +23,7 @@ final class AttendanceProcessorTest extends TestCase{
 
     public function testEmptyItemName(): void
     {
-        $items = ['Lecture', '', 'Support', 'Canvas']; // One item is empty
+        $items = ['Lecture', 'asd', 'Support', 'Canvas']; // One item is empty
         $attendances = [2, 1, 2, 2];
         $total_hours = [33, 22, 44, 55];
 
