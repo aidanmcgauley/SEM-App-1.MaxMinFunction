@@ -8,17 +8,17 @@ class AttendanceProcessor
             "message" => "",
             "items" => "",
             "attendance" => 0,
-            "max_item" => "",
-            "min_item" => ""
+            "max_items" => "",
+            "min_items" => ""
         );
 
         // Check if any session names are empty (as outlined in Section B of spec)
         foreach($items as $item) {
             if(empty($item)) {
-            $output['error'] = true;
-            $output['message'] = "Item names cannot be empty.";
-            echo json_encode($output);
-            exit();
+                $output['error'] = true;
+                $output['message'] = "Item names cannot be empty.";
+                return json_encode($output);
+                exit();
             }
         }
 
@@ -30,7 +30,7 @@ class AttendanceProcessor
             if(!is_numeric($attendance) || (int)$attendance != $attendance) {
             $output['error'] = true;
             $output['message'] = "Attendance hours must be integers.";
-            echo json_encode($output);
+            return json_encode($output);
             exit();
             }
 
@@ -38,7 +38,7 @@ class AttendanceProcessor
             if(!is_numeric($total_assigned_hours) || (int)$total_assigned_hours != $total_assigned_hours) {
                 $output['error'] = true;
                 $output['message'] = "Total hours must be integers.";
-                echo json_encode($output);
+                return json_encode($output);
                 exit();
             }
         
@@ -46,7 +46,7 @@ class AttendanceProcessor
             if($attendance > $total_assigned_hours) {
             $output['error'] = true;
             $output['message'] = "Attendance hours cannot exceed total assigned hours.";
-            echo json_encode($output);
+            return json_encode($output);
             exit();
             }
 
@@ -54,7 +54,7 @@ class AttendanceProcessor
             if ($attendance < 0) {
                 $output['error'] = true;
                 $output['message'] = "Attendance hours cannot be negative.";
-                echo json_encode($output);
+                return json_encode($output);
                 exit();
             }
 
@@ -62,7 +62,7 @@ class AttendanceProcessor
             if ($total_assigned_hours < 0) {
                 $output['error'] = true;
                 $output['message'] = "Total hours cannot be negative.";
-                echo json_encode($output);
+                return json_encode($output);
                 exit();
             }
         }
