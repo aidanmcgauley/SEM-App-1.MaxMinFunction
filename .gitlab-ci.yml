@@ -19,14 +19,14 @@ before_script:
   - composer install
 
 test1:
-  stage: test
+  stage: test1
   image: php:${PHP_VERSION}-cli
   script:
     # Run PHPUnit tests for AttendanceProcessorTest
     - vendor/bin/phpunit --bootstrap vendor/autoload.php src/AttendanceProcessorTest.php
 
 test2:
-  stage: test
+  stage: test2
   image: php:${PHP_VERSION}-cli
   script:
     # Run PHPUnit tests for FunctionsTest
