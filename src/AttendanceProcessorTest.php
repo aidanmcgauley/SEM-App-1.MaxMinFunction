@@ -13,8 +13,8 @@ final class AttendanceProcessorTest extends TestCase{
         $total_hours = [33, 22, 44, 55];
 
         $processor = new AttendanceProcessor();
-        $output = $processor->process($items, $attendances, $total_hours);
-        #$output = json_decode($jsonOutput, true);
+        $jsonOutput = $processor->process($items, $attendances, $total_hours);
+        $output = json_decode($jsonOutput, true);
 
         $this->assertFalse($output['error']);
         $this->assertEquals($items, $output['items']);
