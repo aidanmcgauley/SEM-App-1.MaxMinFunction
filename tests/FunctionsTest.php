@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
-require('../src/functions.inc.php');
+define('PROJECT_ROOT', '/home/aidan/SEM-App/sem-maxmin-40058902');
+require(PROJECT_ROOT . '/src/functions.inc.php');
 use PHPUnit\Framework\TestCase;
 
 final class FunctionsTest extends TestCase{
