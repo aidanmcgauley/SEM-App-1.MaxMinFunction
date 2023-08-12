@@ -22,4 +22,4 @@ test:
   image: php:${PHP_VERSION}-cli
   script:
     # Run PHPUnit tests
-    - vendor/bin/phpunit --bootstrap vendor/autoload.php src/test_functions.php
+    - vendor/bin/phpunit --bootstrap vendor/autoload.php src/test_functions.php/FunctionsTest
