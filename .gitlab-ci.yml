@@ -1,5 +1,6 @@
 stages:
-  - test
+  - test1
+  - test2
 
 variables:
   # Define your PHP version
@@ -17,11 +18,16 @@ before_script:
   - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
   - composer install
 
-test:
+test1:
   stage: test
   image: php:${PHP_VERSION}-cli
   script:
     # Run PHPUnit tests for AttendanceProcessorTest
     - vendor/bin/phpunit --bootstrap vendor/autoload.php src/AttendanceProcessorTest.php
+
+test2:
+  stage: test
+  image: php:${PHP_VERSION}-cli
+  script:
     # Run PHPUnit tests for FunctionsTest
     - vendor/bin/phpunit --bootstrap vendor/autoload.php src/FunctionsTest.php
