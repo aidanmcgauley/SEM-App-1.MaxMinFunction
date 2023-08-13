@@ -1,8 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-type: application/json");
-#require('functions.inc.php');
-require('AttendanceProcessor.php');
+require('functions.inc.php');
 
 $item_1 = $_REQUEST['item_1'];
 $item_2 = $_REQUEST['item_2'];
@@ -21,9 +20,25 @@ $items = array($item_1,$item_2,$item_3,$item_4);
 $attendances = array($attendance_1,$attendance_2,$attendance_3,$attendance_4);
 $total_hours = array($total_hours_1, $total_hours_2, $total_hours_3, $total_hours_4);
 
-$processor = new AttendanceProcessor();
-$output = $processor->process($items, $attendances, $total_hours);
+// First, call parameterChecker to validate the inputs
+$parameter_check_output = parameterChecker($items, $attendances, $total_hours);
 
-#echo json_encode($output);
-echo $output;
+// If no error found, call getMaxMin and proceed
+if (!$parameter_check_output['error']) {
+    list($max_items, $min_items) = getMaxMin($items, $attendances);
+    $output = array(
+        "error" => false,
+        "max_items" => $max_items,
+        "min_items" => $min_items
+    );
+} else {
+    // If there was an error in parameter checking, return the error information
+    $output = $parameter_check_output;
+}
+
+// Send the output as a JSON response
+echo json_encode($output);
+
 exit();
+
+?>

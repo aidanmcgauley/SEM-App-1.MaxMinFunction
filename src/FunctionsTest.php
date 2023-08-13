@@ -155,4 +155,94 @@ final class FunctionsTest extends TestCase{
 
 
 
+    ## TESTING parameterChecker FUNCTION
+
+    public function testValidInput(): void
+    {
+        $items = ['Lecture', 'Lab', 'Support', 'Canvas'];
+        $attendances = [2, 1, 2, 2];
+        $total_hours = [33, 22, 44, 55];
+
+        // Call the parameterChecker function directly
+        $output = parameterChecker($items, $attendances, $total_hours);
+
+        // You can now assert the result without needing to decode JSON
+        $this->assertFalse($output['error']);
+        $this->assertEquals($items, $output['items']);
+        $this->assertEquals($attendances, $output['attendance']);
+        
+    }
+
+    public function testEmptyItemName(): void
+    {
+        $items = ['Lecture', '', 'Support', 'Canvas'];
+        $attendances = [2, 1, 2, 2];
+        $total_hours = [33, 22, 44, 55];
+
+        $output = parameterChecker($items, $attendances, $total_hours);
+
+        $this->assertTrue($output['error']);
+        $this->assertEquals("Item names cannot be empty.", $output['message']);
+    }
+
+    public function testAttendanceNotAnInteger(): void
+    {
+        $items = ['Lecture', 'Lab', 'Support', 'Canvas'];
+        $attendances = [2, 'non-integer', 2, 2];
+        $total_hours = [33, 22, 44, 55];
+
+        $output = parameterChecker($items, $attendances, $total_hours);
+
+        $this->assertTrue($output['error']);
+        $this->assertEquals("Attendance hours must be integers.", $output['message']);
+    }
+
+    public function testTotalHoursNotAnInteger(): void
+    {
+        $items = ['Lecture', 'Lab', 'Support', 'Canvas'];
+        $attendances = [2, 1, 2, 2];
+        $total_hours = [33, 'non-integer', 44, 55];
+
+        $output = parameterChecker($items, $attendances, $total_hours);
+
+        $this->assertTrue($output['error']);
+        $this->assertEquals("Total hours must be integers.", $output['message']);
+    }
+
+    public function testAttendanceExceedsTotalHours(): void
+    {
+        $items = ['Lecture', 'Lab', 'Support', 'Canvas'];
+        $attendances = [2, 50, 2, 2];
+        $total_hours = [33, 22, 44, 55];
+
+        $output = parameterChecker($items, $attendances, $total_hours);
+
+        $this->assertTrue($output['error']);
+        $this->assertEquals("Attendance hours cannot exceed total assigned hours.", $output['message']);
+    }
+
+    public function testNegativeAttendance(): void
+    {
+        $items = ['Lecture', 'Lab', 'Support', 'Canvas'];
+        $attendances = [2, -1, 2, 2];
+        $total_hours = [33, 22, 44, 55];
+
+        $output = parameterChecker($items, $attendances, $total_hours);
+
+        $this->assertTrue($output['error']);
+        $this->assertEquals("Attendance hours cannot be negative.", $output['message']);
+    }
+
+    public function testNegativeTotalHours(): void
+    {
+        $items = ['Lecture', 'Lab', 'Support', 'Canvas'];
+        $attendances = [2, 1, 2, 2];
+        $total_hours = [33, -22, 44, 55];
+
+        $output = parameterChecker($items, $attendances, $total_hours);
+
+        $this->assertTrue($output['error']);
+        $this->assertEquals("Total hours cannot be negative.", $output['message']);
+    }
+
 }

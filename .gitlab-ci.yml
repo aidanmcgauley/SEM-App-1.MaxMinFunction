@@ -1,33 +1,13 @@
+image: php:7.4-apache
+
 stages:
-  - test1
-  - test2
+  - test
 
-variables:
-  # Define your PHP version
-  PHP_VERSION: "7.4"
-
-# Cache vendor/ directory to speed up builds
-cache:
-  paths:
-    - vendor/
-
-before_script:
-  # Install dependencies
-  - apt-get update -yqq
-  - apt-get install -yqq zip unzip
-  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-  - composer install
-
-test1:
-  stage: test1
-  image: php:${PHP_VERSION}-cli
+test:
+  stage: test
   script:
-    # Run PHPUnit tests for AttendanceProcessorTest
-    - vendor/bin/phpunit --bootstrap vendor/autoload.php src/AttendanceProcessorTest.php
-
-test2:
-  stage: test2
-  image: php:${PHP_VERSION}-cli
-  script:
-    # Run PHPUnit tests for FunctionsTest
+    - apt-get update -yqq
+    - apt-get install -yqq git unzip
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - composer install
     - vendor/bin/phpunit --bootstrap vendor/autoload.php src/FunctionsTest.php
