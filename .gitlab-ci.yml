@@ -11,10 +11,11 @@ build:
     - apt-get install -yqq git unzip
     - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
     - composer install
+  artifacts:
+    paths:
+      - vendor/
 
 FunctionsTest:
   stage: FunctionsTest
   script:
     - vendor/bin/phpunit --bootstrap vendor/autoload.php src/FunctionsTest.php
-  dependencies:
-    - "build"
