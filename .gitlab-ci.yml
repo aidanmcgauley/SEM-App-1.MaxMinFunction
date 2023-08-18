@@ -16,3 +16,5 @@ FunctionsTest:
   stage: FunctionsTest
   script:
     - vendor/bin/phpunit --bootstrap vendor/autoload.php src/FunctionsTest.php
+  dependencies:
+    - "build"
